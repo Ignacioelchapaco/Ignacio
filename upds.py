@@ -12,7 +12,7 @@ st.write('Archivos en el directorio actual:')
 st.write(os.listdir('.'))
 
 # Cambia la ruta del archivo a la ruta local correcta
-file_path = 'BIG FIVE 1995-2019.csv'  # Si el archivo está en el mismo directorio que el script Python
+file_path = '/home/ignacio/Descargas/archive/BIG FIVE 1995-2019.csv'  # Si el archivo está en el mismo directorio que el script Python
 # file_path = '/ruta/completa/al/archivo/BIG FIVE 1995-2019.csv'  # Si está en otro directorio
 
 # Cargar el archivo CSV
