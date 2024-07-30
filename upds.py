@@ -5,17 +5,14 @@ import plotly.express as px
 import os
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
+import gdown
 
-# Imprimir el directorio actual de trabajo
-st.write(f'Directorio actual de trjo: {os.getcwd()}')
+# Descargar el archivo CSV desde Google Drive
+file_url = 'https://drive.google.com/uc?id=1eCvay0DQLM5giVzPCgW6gdbPmAfhsYvs'
+file_path = 'BIG_FIVE_1995-2019.csv'
 
-# Listar los archivos en el directorio actual de trabajo
-st.write('Archivos en el directorio actual:')
-st.write(os.listdir('.'))
-
-# Cambia la ruta del archivo a la ruta local correcta
-file_path = '/home/ignacio/Descargas/archive/BIG FIVE 1995-2019.csv'  # Si el archivo está en el mismo directorio que el script Python
-# file_path = '/ruta/completa/al/archivo/BIG FIVE 1995-2019.csv'  # Si está en otro directorio
+if not os.path.exists(file_path):
+    gdown.download(file_url, file_path, quiet=False)
 
 # Cargar el archivo CSV
 try:
@@ -23,6 +20,13 @@ try:
 except FileNotFoundError:
     st.error(f'El archivo {file_path} no se encontró. Por favor, verifica la ruta del archivo.')
     st.stop()
+
+# Imprimir el directorio actual de trabajo
+st.write(f'Directorio actual de trabajo: {os.getcwd()}')
+
+# Listar los archivos en el directorio actual de trabajo
+st.write('Archivos en el directorio actual:')
+st.write(os.listdir('.'))
 
 # Seleccionar el número de filas a mostrar
 num_rows = st.slider('Selecciona el número de filas a mostrar:', min_value=1, max_value=len(data), value=100)
