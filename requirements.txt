@@ -18,7 +18,7 @@ cycler==0.12.1
 dbus-python==1.2.18
 defer==1.0.6
 distro==1.7.0
-distro-info==1.1+ubuntu0.2
+distro-info
 duplicity==0.8.21
 et-xmlfile==1.1.0
 fasteners==0.14.1

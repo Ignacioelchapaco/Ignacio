@@ -5,7 +5,7 @@ import plotly.express as px
 import os
 
 # Imprimir el directorio actual de trabajo
-st.write(f'Directorio actual de trabajo: {os.getcwd()}')
+st.write(f'Directorio actual de trjo: {os.getcwd()}')
 
 # Listar los archivos en el directorio actual de trabajo
 st.write('Archivos en el directorio actual:')
