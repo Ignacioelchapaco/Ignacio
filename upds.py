@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import os
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
 
 # Imprimir el directorio actual de trabajo
 st.write(f'Directorio actual de trjo: {os.getcwd()}')
@@ -53,6 +55,31 @@ elif chart_type == 'Barra':
 elif chart_type == 'Dispersión':
     fig = px.scatter(data_limited, x=x_axis, y=y_axis, title=f'Gráfico de dispersión de {x_axis} vs {y_axis}')
     st.plotly_chart(fig)
+
+# Calcular regresión lineal y R^2
+X = data_limited[[x_axis]].values
+y = data_limited[y_axis].values
+
+model = LinearRegression()
+model.fit(X, y)
+y_pred = model.predict(X)
+r2 = r2_score(y, y_pred)
+
+# Mostrar la regresión lineal y R^2
+st.write(f'Regresión lineal: {x_axis} vs {y_axis}')
+st.write(f'Coeficiente de regresión (pendiente): {model.coef_[0]}')
+st.write(f'Intersección: {model.intercept_}')
+st.write(f'R^2: {r2*100:.2f}%')
+
+# Graficar la regresión lineal
+fig, ax = plt.subplots()
+ax.scatter(data_limited[x_axis], data_limited[y_axis], label='Datos')
+ax.plot(data_limited[x_axis], y_pred, color='red', label='Regresión lineal')
+ax.set_xlabel(x_axis)
+ax.set_ylabel(y_axis)
+ax.set_title(f'Regresión lineal de {x_axis} vs {y_axis}')
+ax.legend()
+st.pyplot(fig)
 
 # Opcional: Agregar estadísticas descriptivas
 if st.checkbox('Mostrar estadísticas descriptivas'):
